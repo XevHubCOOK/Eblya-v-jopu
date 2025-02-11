@@ -74,7 +74,7 @@ end
 -- Обработка инъекции
 local function handleInjection(discordId)
     if checkUser(discordId) then
-        sendToDiscord(webhookInjection, "Пользователь с ID " .. discordId .. " инжектнул скрипт!")
+        sendToDiscord(webhookInjection, "Пользователь с ID " .. discordId .. " инжектнул скрипт с HWID: " .. hwid)
         -- Запуск скрипта
         loadstring(game:HttpGet("yourscript"))() -- не забудьте заменить "yourscript" на вашу ссылку
     else
